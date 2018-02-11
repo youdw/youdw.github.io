@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Mysql数据库更改数据存储目录 | wei`s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Centos7下，Mysql数据库更改存储目录">
+<meta name="keywords" content="mysql centos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql数据库更改数据存储目录">
+<meta property="og:url" content="http://youdw.cc/20170630/mysql-change-data-location/index.html">
+<meta property="og:site_name" content="wei`s blog">
+<meta property="og:description" content="Centos7下，Mysql数据库更改存储目录">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-02-11T02:52:49.532Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mysql数据库更改数据存储目录">
+<meta name="twitter:description" content="Centos7下，Mysql数据库更改存储目录">
+  
+    <link rel="alternate" href="/atom.xml" title="wei`s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wei`s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://youdw.cc"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-mysql-change-data-location" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/20170630/mysql-change-data-location/" class="article-date">
+  <time datetime="2017-06-30T05:49:50.000Z" itemprop="datePublished">2017-06-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mysql数据库更改数据存储目录
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文操作并记录一次更改Mysql数据库的存储位置</p>
+<h2 id="系统信息及Mysql版本号"><a href="#系统信息及Mysql版本号" class="headerlink" title="系统信息及Mysql版本号"></a>系统信息及Mysql版本号</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -V</span><br><span class="line">$ mysql  Ver 14.14 Distrib 5.7.17, <span class="keyword">for</span> linux-glibc2.5 (x86_64) using  EditLine wrapper</span><br></pre></td></tr></table></figure>
+<h2 id="查看目前Mysql数据存储位置"><a href="#查看目前Mysql数据存储位置" class="headerlink" title="查看目前Mysql数据存储位置"></a>查看目前Mysql数据存储位置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mysqladmin -u root -p variables | grep datadir</span><br><span class="line"><span class="comment">#这里是默认的位置</span></span><br><span class="line">| datadir                                     | /var/lib/mysql/</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="停止Mysql服务"><a href="#停止Mysql服务" class="headerlink" title="停止Mysql服务"></a>停止Mysql服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ service mysqld stop</span><br><span class="line"><span class="comment">#已停止服务</span></span><br><span class="line">$ Stopping mysqld:                                           [  OK  ]</span><br></pre></td></tr></table></figure>
+<h2 id="创建新的存储目录"><a href="#创建新的存储目录" class="headerlink" title="创建新的存储目录"></a>创建新的存储目录</h2><p>新目录位置为（/mnt/mysqlData）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /mnt</span><br><span class="line">$ mkdir mysqlData</span><br></pre></td></tr></table></figure>
+<h2 id="复制已有数据到新的目录"><a href="#复制已有数据到新的目录" class="headerlink" title="复制已有数据到新的目录"></a>复制已有数据到新的目录</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cp -r /var/lib/mysql/ /mnt/mysqlData/</span><br></pre></td></tr></table></figure>
+<h2 id="更改Mysql配置文件"><a href="#更改Mysql配置文件" class="headerlink" title="更改Mysql配置文件"></a>更改Mysql配置文件</h2><p>修改[client]（无则添加）和[mysqld]</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/my.cnf</span><br><span class="line"></span><br><span class="line"><span class="comment">#my.cnf</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[client]</span><br><span class="line">port            = 3306</span><br><span class="line">socket          = /mnt/mysqlData/mysql/mysql.sock</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">datadir=/mnt/mysqlData/mysql</span><br><span class="line">socket=/mnt/mysqlData/mysql/mysql.sock</span><br></pre></td></tr></table></figure>
+<h2 id="启动mysql服务"><a href="#启动mysql服务" class="headerlink" title="启动mysql服务"></a>启动mysql服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service mysqld start</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://youdw.cc/20170630/mysql-change-data-location/" data-id="cjdi76nuj00024ufyf2d5uya1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/20170315/Linux1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CentOS7（Nginx + Tomcat）基本环境配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/20170630/mysql-change-data-location/">Mysql数据库更改数据存储目录</a>
+          </li>
+        
+          <li>
+            <a href="/20170315/Linux1/">CentOS7（Nginx + Tomcat）基本环境配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 youdw<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
