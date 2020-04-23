@@ -6,19 +6,15 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>Mysql Change Data Location | wei</title>
-        <meta name="Description" content=""><meta property="og:title" content="Mysql Change Data Location" />
-<meta property="og:description" content="本文操作并记录一次更改Mysql数据库的存储位置
-系统信息及Mysql版本号 1 2  mysql -V mysql Ver 14.14 Distrib 5.7.17, for linux-glibc2.5 (x86_64) using EditLine wrapper   查看目前Mysql数据存储位置 1 2 3  mysqladmin -u root -p variables | grep datadir #这里是默认的位置 | datadir | /var/lib/mysql/   停止Mysql服务 1 2 3  service mysqld stop #已停止服务 Stopping mysqld: [ OK ]   创建新的存储目录 新目录位置为（/mnt/mysqlData）
-1 2  cd /mnt mkdir mysqlData   复制已有数据到新的目录 1  cp -r /var/lib/mysql/ /mnt/mysqlData/   更改Mysql配置文件 修改[client]（无则添加）和[mysqld]" />
+        <meta name="Description" content="记录一次更改Mysql数据库的存储位置"><meta property="og:title" content="Mysql Change Data Location" />
+<meta property="og:description" content="记录一次更改Mysql数据库的存储位置" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/posts/mysql-change-data-location/" />
 <meta property="article:published_time" content="2017-06-30T13:49:50+08:00" />
 <meta property="article:modified_time" content="2017-06-30T13:49:50+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Mysql Change Data Location"/>
-<meta name="twitter:description" content="本文操作并记录一次更改Mysql数据库的存储位置
-系统信息及Mysql版本号 1 2  mysql -V mysql Ver 14.14 Distrib 5.7.17, for linux-glibc2.5 (x86_64) using EditLine wrapper   查看目前Mysql数据存储位置 1 2 3  mysqladmin -u root -p variables | grep datadir #这里是默认的位置 | datadir | /var/lib/mysql/   停止Mysql服务 1 2 3  service mysqld stop #已停止服务 Stopping mysqld: [ OK ]   创建新的存储目录 新目录位置为（/mnt/mysqlData）
-1 2  cd /mnt mkdir mysqlData   复制已有数据到新的目录 1  cp -r /var/lib/mysql/ /mnt/mysqlData/   更改Mysql配置文件 修改[client]（无则添加）和[mysqld]"/>
+<meta name="twitter:description" content="记录一次更改Mysql数据库的存储位置"/>
 <meta name="theme-color" content="#ffffff">
 <meta name="msapplication-TileColor" content="#da532c">
 <link rel="canonical" href="http://example.org/posts/mysql-change-data-location/" />
@@ -36,11 +32,11 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/mysql-change-data-location\/"
-        },"genre": "posts","keywords": "Mysql","wordcount":  97 ,
+        },"genre": "posts","keywords": "Mysql","wordcount":  96 ,
         "url": "http:\/\/example.org\/posts\/mysql-change-data-location\/","datePublished": "2017-06-30","dateModified": "2017-06-30","author": {
                 "@type": "Person",
                 "name": "youdw"
-            },"description": ""
+            },"description": "记录一次更改Mysql数据库的存储位置"
     }
     </script></head>
     <body><script>
@@ -86,7 +82,7 @@
                                 <i class="far fa-folder fa-fw"></i>Development
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2017-06-30>2017-06-30</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>约 97 字&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 96 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>预计阅读 1 分钟&nbsp;</div>
         </div><div class="toc" id="toc-auto">
                 <h2 class="toc-title">目录</h2>
@@ -112,8 +108,7 @@
   </ul>
 </nav></div>
                 </details>
-            </div><div class="content" id="content"><p>本文操作并记录一次更改Mysql数据库的存储位置</p>
-<h2 id="系统信息及mysql版本号">系统信息及Mysql版本号</h2>
+            </div><div class="content" id="content"><h2 id="系统信息及mysql版本号">系统信息及Mysql版本号</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1

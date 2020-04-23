@@ -75,11 +75,13 @@
         class="lazyload"
         src="/svg/loading.small.min.svg"
         data-sizes="auto"
-        data-srcset="/images/avatar.png,  1.5x,  2x"
+        data-srcset="/images/header.jpeg,  1.5x,  2x"
         data-src=""
         alt="avatar"
         title="主页" /></a>
-        </div><h2 class="home-description"><div id="id-334934" class="typeit"></div></h2><div class="home-social-links"></div>
+        </div><h2 class="home-description"><div id="id-89cecc" class="typeit"></div></h2><div class="home-social-links"><a href="https://github.com/youdw" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a>
+<a href="mailto:youdw@foxmai.com" title="Email" rel="noopener noreffer me"><i class="far fa-envelope fa-fw"></i></a>
+</div>
 </div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/mysql-change-data-location/">Mysql Change Data Location</a>
@@ -89,8 +91,7 @@
         </span>&nbsp;
             <span class="post-category">收录于<a href="/categories/development">
                         <i class="far fa-folder fa-fw"></i>Development
-                    </a></span></div><div class="content">本文操作并记录一次更改Mysql数据库的存储位置
-系统信息及Mysql版本号 1 2  mysql -V mysql Ver 14.14 Distrib 5.7.17, for linux-glibc2.5 (x86_64) using EditLine wrapper   查看目前Mysql数据存储位置 1 2 3  mysqladmin -u root -p variables | grep datadir #这里是默认的位置 | datadir | /var/lib/mysql/   停止Mysql服务 1 2 3  service mysqld stop #已停止服务 Stopping mysqld: [ OK ]   创建新的存储目录 新目录位置为（/mnt/mysqlData）
+                    </a></span></div><div class="content">系统信息及Mysql版本号 1 2  mysql -V mysql Ver 14.14 Distrib 5.7.17, for linux-glibc2.5 (x86_64) using EditLine wrapper   查看目前Mysql数据存储位置 1 2 3  mysqladmin -u root -p variables | grep datadir #这里是默认的位置 | datadir | /var/lib/mysql/   停止Mysql服务 1 2 3  service mysqld stop #已停止服务 Stopping mysqld: [ OK ]   创建新的存储目录 新目录位置为（/mnt/mysqlData）
 1 2  cd /mnt mkdir mysqlData   复制已有数据到新的目录 1  cp -r /var/lib/mysql/ /mnt/mysqlData/   更改Mysql配置文件 修改[client]（无则添加）和[mysqld]</div><div class="post-footer">
         <a href="/posts/mysql-change-data-location/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/mysql">Mysql</a></div></div>
@@ -118,8 +119,8 @@
             });
         });
     </script><script>
-        window.typeitArr = [["id-334934"]];
+        window.typeitArr = [["id-89cecc"]];
     </script><script>
-        window.contentMap = {"id-334934":"这是我的全新 Hugo 网站"};
+        window.contentMap = {"id-89cecc":"记录生活 分享技术"};
     </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/lib/typeit/typeit.min.js"></script><script src="/js/theme.min.js"></script></body>
 </html>
