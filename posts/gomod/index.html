@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-Cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Go mod的使用、发布、升级 | wei</title>
+        <meta name="Description" content="Go语言模块管理使用学习记录"><meta property="og:title" content="Go mod的使用、发布、升级" />
+<meta property="og:description" content="Go语言模块管理使用学习记录" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/gomod/" />
+<meta property="article:published_time" content="2020-04-23T16:59:05+08:00" />
+<meta property="article:modified_time" content="2020-04-23T16:59:05+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go mod的使用、发布、升级"/>
+<meta name="twitter:description" content="Go语言模块管理使用学习记录"/>
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#da532c">
+<link rel="canonical" href="http://example.org/posts/gomod/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="http://example.org/posts/mysql-change-data-location/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Go mod的使用、发布、升级",
+        "inLanguage": "zh-Cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/gomod\/"
+        },"genre": "posts","keywords": "Go, Golang, Go mod","wordcount":  368 ,
+        "url": "http:\/\/example.org\/posts\/gomod\/","datePublished": "2020-04-23","dateModified": "2020-04-23","author": {
+                "@type": "Person",
+                "name": "youdw"
+            },"description": "Go语言模块管理使用学习记录"
+    }
+    </script></head>
+    <body><script>
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {window.isDark = '' === 'dark';} else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/">wei</a>
+        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">Posts</a><a class="menu-item" href="/tags/" rel="noopener noreffer">Tags</a><a class="menu-item" href="/categories/" rel="noopener noreffer">Categories</a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title">
+                <a href="/">wei</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">Posts</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">Tags</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+
+<script>
+    window.desktopHeaderMode =  null ;
+    window.mobileHeaderMode =  null ;
+</script>
+<main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">Go mod的使用、发布、升级</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>youdw</a>
+</span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/development">
+                                <i class="far fa-folder fa-fw"></i>Development
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-04-23>2020-04-23</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 368 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 2 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-sizes="auto"
+        data-srcset="/images/code/gomod.png, /images/code/gomod.png 1.5x, /images/code/gomod.png 2x"
+        data-src="/images/code/gomod.png"
+        alt="Go语言模块管理使用学习记录"
+        title="Go语言模块管理使用学习记录" /></div><div class="toc" id="toc-auto">
+                <h2 class="toc-title">目录</h2>
+                <div class="toc-content always-active" id="toc-content-auto"></div>
+            </div>
+            <div class="toc" id="toc-static">
+                <details>
+                    <summary>
+                        <div class="toc-title">
+                            <span>目录</span>
+                            <span><i class="details icon fas fa-angle-down"></i></span>
+                        </div>
+                    </summary>
+                    <div class="toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#创建模块">创建模块</a>
+      <ul>
+        <li><a href="#创建目录和源代码sup1suprefer-anchor-1">创建目录和源代码<a href="#refer-anchor-1"><sup>1</sup></a></a></li>
+        <li><a href="#初始化mod">初始化mod</a></li>
+      </ul>
+    </li>
+    <li><a href="#版本号及发布-sup2suprefer-anchor-2">版本号及发布 <a href="#refer-anchor-2"><sup>2</sup></a></a>
+      <ul>
+        <li><a href="#创建仓库">创建仓库</a></li>
+        <li><a href="#标记并推送tag">标记并推送Tag</a></li>
+        <li><a href="#在其他项目中引用">在其他项目中引用</a></li>
+      </ul>
+    </li>
+    <li><a href="#版本升级">版本升级</a>
+      <ul>
+        <li><a href="#v0-v1">v0-&gt;v1</a></li>
+        <li><a href="#v1-v2">v1-&gt;v2</a></li>
+        <li><a href="#创建新的版本目录v2">创建新的版本目录v2</a></li>
+        <li><a href="#继续使用v0-v1的升级方式">继续使用v0-&gt;v1的升级方式</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav></div>
+                </details>
+            </div><div class="content" id="content"><h2 id="简介">简介</h2>
+<p>这篇文章介绍了go模块管理的基础使用，分以下三个部分</p>
+<ol>
+<li>创建模块</li>
+<li>发布模块及版本介绍</li>
+<li>版本升级</li>
+</ol>
+<div class="admonition info">
+            <p class="admonition-title"><i class="icon fas fa-info-circle"></i>信息</p>
+            <div class="admonition-content">本文是阅读go blog之后的一个提炼，更详细文档请参考  <strong><a href="https://blog.golang.org/using-go-modules" target="_blank" rel="noopener noreffer">Go Modules</a>
+</strong>.
+<code> https://blog.golang.org/using-go-modules</code></div>
+        </div>
+<h2 id="创建模块">创建模块</h2>
+<h3 id="创建目录和源代码sup1suprefer-anchor-1">创建目录和源代码<a href="#refer-anchor-1" rel="noopener noreffer"><sup>1</sup></a>
+</h3>
+<p>在<code>$GOPATH/src</code>之外创建一个目录<code>hello</code>,然后新增两个文件<code>hello.go</code>和<code>hello_test.go</code>,项目结构如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">.
+├── hello.go
+└── hello_test.go 
+</code></pre></td></tr></table>
+</div>
+</div><p>分别编辑<code>hello.go</code> 和 <code>hello_test.go</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// hello.go
+</span><span class="c1"></span><span class="kn">package</span> <span class="nx">hello</span>
+
+<span class="kd">func</span> <span class="nf">Hello</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">&#34;Hello, world.&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// hello_test.go
+</span><span class="c1"></span><span class="kn">package</span> <span class="nx">hello</span>
+
+<span class="kn">import</span> <span class="s">&#34;testing&#34;</span>
+
+<span class="kd">func</span> <span class="nf">TestHello</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">want</span> <span class="o">:=</span> <span class="s">&#34;Hello, world.&#34;</span>
+    <span class="k">if</span> <span class="nx">got</span> <span class="o">:=</span> <span class="nf">Hello</span><span class="p">();</span> <span class="nx">got</span> <span class="o">!=</span> <span class="nx">want</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Hello() = %q, want %q&#34;</span><span class="p">,</span> <span class="nx">got</span><span class="p">,</span> <span class="nx">want</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="初始化mod">初始化mod</h3>
+<p>可以在当前目录下执行 <code>go test</code> 看到执行出错，由于我们的项目不在<code>$GOPATH</code>中,所以<code>go command</code>不知道当前目录的导入路径；可以使用 <code>go mod init</code> 命令是当前目录变成模块的根目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">go mod init github.com/youdw/hello
+go: creating new go.mod: module example.com/hello
+</code></pre></td></tr></table>
+</div>
+</div><p><div class="admonition tip">
+            <p class="admonition-title"><i class="icon fas fa-lightbulb"></i>技巧</p>
+            <div class="admonition-content">注意模块命名方式,如果你的项目要发布到github，则命名为：<code>github.com/&lt;USERNAME&gt;/&lt;MODULE_NAME&gt;</code>
+e.g.<code>github.com/youdw/hello</code></div>
+        </div>
+此时再执行<code>go test</code>，可以看到已经成功执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">go <span class="nb">test</span>
+PASS
+ok  	github.com/youdw/hello	0.020s
+</code></pre></td></tr></table>
+</div>
+</div><p>至此hello模块已经初始化完成，让我们看下现在的目录结构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">.
+├── go.mod
+├── go.sum
+├── hello.go
+└── hello_test.go
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="版本号及发布-sup2suprefer-anchor-2">版本号及发布 <a href="#refer-anchor-2" rel="noopener noreffer"><sup>2</sup></a>
+</h2>
+<p>Go模块版本只要分为三个部分如<code>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</code>，例如对于v1.0.1,主版本<code>&lt;major&gt;</code>是1，次版本<code>&lt;minor&gt;</code>是0，补丁版本<code>&lt;patch&gt;</code>是1</p>
+<p>v0版本为项目的初始版本，版本不保证稳定行，可以通过<code>git tag</code>来标记版本，将tag推送至仓库即可
+v1版本为稳定版本，当你的项目稳定之后，可以标记v1版本对外发布；另外对于稳定之后的预发布版本，由于Go命令首选的是正常版本，而不是与发布版本；可以通过<code>-</code>来制定预发布版本，如<code>v1.0.1-beta</code>、<code>v1.0.1-alpha</code>；使用的时候需要显示的指定与发布版本<code>go get github.com/youdw/helle@v1.0.1-beta</code>
+下面看下怎么发布第一个v0.0.1版本</p>
+<h3 id="创建仓库">创建仓库</h3>
+<p>首先在你的github仓库创建一个<code>repository</code>，命名为<code>hello</code>，然后将hello项目同步至仓库</p>
+<h3 id="标记并推送tag">标记并推送Tag</h3>
+<p>通过git标签维护版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">    git tag v0.0.1
+    git push origin v0.0.1
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="在其他项目中引用">在其他项目中引用</h3>
+<p>在项目中直接导入<code>&quot;github.com/youdw/hello&quot;</code>，然后通过执行 go mod tiny或者go mod build就可以添加新的依赖了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;github.com/youdw/hello&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">hello</span><span class="p">.</span><span class="nf">Hello</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>引入依赖之后 cat go.mod，可以看到已经引入了我们自定义的模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">module</span> <span class="nx">study</span>
+
+<span class="k">go</span> <span class="mf">1.13</span>
+
+<span class="nf">require</span> <span class="p">(</span>
+        <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">youdw</span><span class="o">/</span><span class="nx">hello</span> <span class="nx">v0</span><span class="mf">.0.1</span>
+<span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="版本升级">版本升级</h2>
+<p>Go模块中规范了一个重要原则</p>
+<p><em><strong>If an old package and a new package have the same import path,
+the new package must be backwards compatible with the old package.</strong></em><a href="#refer-anchor-3" rel="noopener noreffer"><sup>3</sup></a>
+</p>
+<pre><code>如果旧包和新包具有相同的导入路径，新包必须向后兼容旧包。
+</code></pre>
+<h3 id="v0-v1">v0-&gt;v1</h3>
+<p>假设我们自定义的模块已经稳定了，那么开始要对外发布v1.0.0版本了</p>
+<ol>
+<li>拉取新的分支v1.0.0_branch</li>
+<li>git tag v1.0.0 并且推送到远程仓库</li>
+</ol>
+<h3 id="v1-v2">v1-&gt;v2</h3>
+<p>v1-&gt;v2的升级属于主版本的升级（v2不向后兼容），
+这里有两种方式：</p>
+<ul>
+<li>创建新的版本目录v2</li>
+<li>继续使用v0-&gt;v1的升级方式</li>
+</ul>
+<h3 id="创建新的版本目录v2">创建新的版本目录v2</h3>
+<p>按照go模块规范的原则，我们不能继续使用<code>github.com/youdw/hello</code> 这个包路径了。当前v1版本目录如下；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">.
+├── go.mod
+├── go.sum
+├── hello.go
+└── hello_test.go
+</code></pre></td></tr></table>
+</div>
+</div><p>为了开始开发v2，在hello目录下创建v2目录,然后把.go 和 mod 文件复制到v2<a href="#refer-anchor-4" rel="noopener noreffer"><sup>4</sup></a>
+，然后将v2目录下的mod路径修改为
+<code>github.com/youdw/hello/v2</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir v2
+cp *.go v2/
+cp go.mod v2/go.mod
+go mod edit -module github.com/youdw/hello/v2 v2/go.mod
+</code></pre></td></tr></table>
+</div>
+</div><p>完成之后的项目结构如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">.
+├── go.mod
+├── go.sum
+├── hello.go
+├── hello_test.go
+└── v2
+    ├── go.mod
+    ├── hello.go
+    └── hello_test.go
+
+1 directory, 7 files
+</code></pre></td></tr></table>
+</div>
+</div><p>发布v2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git tag v2.0.0
+git push origin v2.0.0
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="继续使用v0-v1的升级方式">继续使用v0-&gt;v1的升级方式</h3>
+<p>拉取新的分支，修改go.mod路径为<code>github.com/youdw/hello/v2</code>，基于master分支打tag v2.0.0</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">go mod edit -module github.com/youdw/hello/v2
+git push
+git tag v2.0.0
+git push origin v2.0.0
+</code></pre></td></tr></table>
+</div>
+</div><p>以上两种方式，第一种是go模块推荐的方式，但是维护和开发的开销较大，</p>
+<h2 id="参考">参考</h2>
+<div id="refer-anchor-1"></div>
+- [1] [using-go-modules](https://blog.golang.org/using-go-modules)
+<div id="refer-anchor-2"></div>
+- [2] [publishing-go-modules](https://blog.golang.org/publishing-go-modules)
+<div id="refer-anchor-3"></div>
+- [3] [Semantic Import Versioning](https://research.swtch.com/vgo-import)
+<div id="refer-anchor-4"></div>
+- [4] [v2-go-modules](https://blog.golang.org/v2-go-modules)</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-04-23 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/posts/gomod/" data-title="Go mod的使用、发布、升级" data-hashtags="Go,Golang,Go mod"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/posts/gomod/" data-hashtag="Go"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/posts/gomod/" data-title="Go mod的使用、发布、升级" data-image="/images/code/gomod.png"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="http://example.org/posts/gomod/" data-title="Go mod的使用、发布、升级"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go">Go</a>,&nbsp;<a href="/tags/golang">Golang</a>,&nbsp;<a href="/tags/go-mod">Go mod</a></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/mysql-change-data-location/" class="prev" rel="prev" title="Mysql Change Data Location"><i class="fas fa-angle-left fa-fw"></i>Mysql Change Data Location</a></div>
+</div>
+<div class="comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright"><div class="copyright-line">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer"><i class="far fa-heart fa-fw"></i> LoveIt</a>
+        </div>
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">youdw</a></span></div>
+    </div>
+</footer>
+</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
+            <i class="fas fa-chevron-up fa-fw"></i>
+        </a><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('content'), {
+                selector: '.lightgallery',
+                speed: 400,
+                hideBarsDelay: 2000,
+                thumbnail: true,
+                exThumbImage: 'data-thumbnail',
+                thumbWidth: 80,
+                thumbContHeight: 80,
+            });
+        });
+    </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/js/theme.min.js"></script></body>
+</html>

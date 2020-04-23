@@ -6,10 +6,37 @@
     <description>Recent content in Tags on wei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Cn</language>
-    <lastBuildDate>Fri, 30 Jun 2017 13:49:50 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2020 16:59:05 +0800</lastBuildDate>
     
 	<atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go</title>
+      <link>http://example.org/tags/go/</link>
+      <pubDate>Thu, 23 Apr 2020 16:59:05 +0800</pubDate>
+      
+      <guid>http://example.org/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go mod</title>
+      <link>http://example.org/tags/go-mod/</link>
+      <pubDate>Thu, 23 Apr 2020 16:59:05 +0800</pubDate>
+      
+      <guid>http://example.org/tags/go-mod/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>http://example.org/tags/golang/</link>
+      <pubDate>Thu, 23 Apr 2020 16:59:05 +0800</pubDate>
+      
+      <guid>http://example.org/tags/golang/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Mysql</title>

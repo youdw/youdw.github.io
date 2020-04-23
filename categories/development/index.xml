@@ -6,10 +6,23 @@
     <description>Recent content in Development on wei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Cn</language>
-    <lastBuildDate>Fri, 30 Jun 2017 13:49:50 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2020 16:59:05 +0800</lastBuildDate>
     
 	<atom:link href="http://example.org/categories/development/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go mod的使用、发布、升级</title>
+      <link>http://example.org/posts/gomod/</link>
+      <pubDate>Thu, 23 Apr 2020 16:59:05 +0800</pubDate>
+      
+      <guid>http://example.org/posts/gomod/</guid>
+      <description>简介 这篇文章介绍了go模块管理的基础使用，分以下三个部分
+ 创建模块 发布模块及版本介绍 版本升级  信息
+本文是阅读go blog之后的一个提炼，更详细文档请参考 Go Modules .  https://blog.golang.org/using-go-modules  创建模块 创建目录和源代码1  在$GOPATH/src之外创建一个目录hello,然后新增两个文件hello.go和hello_test.go,项目结构如下
+1 2 3  . ├── hello.go └── hello_test.go   分别编辑hello.go 和 hello_test.go
+1 2 3 4 5 6  // hello.go package hello func Hello() string { return &amp;#34;Hello, world.&amp;#34; }   1 2 3 4 5 6 7 8 9 10 11  // hello_test.go package hello import &amp;#34;testing&amp;#34; func TestHello(t *testing.</description>
+    </item>
     
     <item>
       <title>Mysql Change Data Location</title>

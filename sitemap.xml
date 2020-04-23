@@ -2,10 +2,14 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://example.org/categories/</loc><lastmod>2017-06-30T13:49:50&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/categories/development/</loc><lastmod>2017-06-30T13:49:50&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/categories/</loc><lastmod>2020-04-23T16:59:05&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/categories/development/</loc><lastmod>2020-04-23T16:59:05&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/go/</loc><lastmod>2020-04-23T16:59:05&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/go-mod/</loc><lastmod>2020-04-23T16:59:05&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/gomod/</loc><lastmod>2020-04-23T16:59:05&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/golang/</loc><lastmod>2020-04-23T16:59:05&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/</loc><lastmod>2020-04-23T16:59:05&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/</loc><lastmod>2020-04-23T16:59:05&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/</loc><lastmod>2020-04-23T16:59:05&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/mysql/</loc><lastmod>2017-06-30T13:49:50&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/posts/mysql-change-data-location/</loc><lastmod>2017-06-30T13:49:50&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/posts/</loc><lastmod>2017-06-30T13:49:50&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/tags/</loc><lastmod>2017-06-30T13:49:50&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/</loc><lastmod>2017-06-30T13:49:50&#43;08:00</lastmod></url></urlset>
+            <loc>http://example.org/posts/mysql-change-data-location/</loc><lastmod>2017-06-30T13:49:50&#43;08:00</lastmod></url></urlset>
