@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mysql on wei</title>
+    <link>http://example.org/tags/mysql/</link>
+    <description>Recent content in Mysql on wei</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-Cn</language>
+    <lastBuildDate>Fri, 30 Jun 2017 13:49:50 +0800</lastBuildDate>
+    
+	<atom:link href="http://example.org/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mysql Change Data Location</title>
+      <link>http://example.org/posts/mysql-change-data-location/</link>
+      <pubDate>Fri, 30 Jun 2017 13:49:50 +0800</pubDate>
+      
+      <guid>http://example.org/posts/mysql-change-data-location/</guid>
+      <description>本文操作并记录一次更改Mysql数据库的存储位置
+系统信息及Mysql版本号 1 2  mysql -V mysql Ver 14.14 Distrib 5.7.17, for linux-glibc2.5 (x86_64) using EditLine wrapper   查看目前Mysql数据存储位置 1 2 3  mysqladmin -u root -p variables | grep datadir #这里是默认的位置 | datadir | /var/lib/mysql/   停止Mysql服务 1 2 3  service mysqld stop #已停止服务 Stopping mysqld: [ OK ]   创建新的存储目录 新目录位置为（/mnt/mysqlData）
+1 2  cd /mnt mkdir mysqlData   复制已有数据到新的目录 1  cp -r /var/lib/mysql/ /mnt/mysqlData/   更改Mysql配置文件 修改[client]（无则添加）和[mysqld]</description>
+    </item>
+    
+  </channel>
+</rss>
