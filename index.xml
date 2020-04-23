@@ -1,0 +1,12 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>wei | wei</title>
+        <link>http://example.org/</link>
+        <description>wei | wei</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-Cn</language><lastBuildDate>Thu, 23 Apr 2020 13:14:31 &#43;0800</lastBuildDate><atom:link href="http://example.org/" rel="self" type="application/rss+xml" /><item>
+                <title>Posts</title>
+                <link>http://example.org/posts/</link>
+                <pubDate>Thu, 23 Apr 2020 13:14:31 &#43;0800</pubDate><guid>http://example.org/posts/</guid>
+                <description></description>
+            </item></channel>
+</rss>

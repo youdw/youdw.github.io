@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /js/
-Disallow: /css/
-Disallow: /images/
-Disallow: /lib/
-Sitemap: http://youdw.cc/sitemap.xml
-Sitemap: http://youdw.cc/baidusitemap.xml
