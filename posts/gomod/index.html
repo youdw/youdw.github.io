@@ -216,7 +216,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">go mod init github.com/youdw/hello
-go: creating new go.mod: module example.com/hello
+go: creating new go.mod: module github.com/youdw/hello
 </code></pre></td></tr></table>
 </div>
 </div><p><div class="admonition tip">
@@ -258,7 +258,7 @@ ok  	github.com/youdw/hello	0.020s
 </h2>
 <p>Go模块版本只要分为三个部分如<code>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</code>，例如对于v1.0.1,主版本<code>&lt;major&gt;</code>是1，次版本<code>&lt;minor&gt;</code>是0，补丁版本<code>&lt;patch&gt;</code>是1</p>
 <p>v0版本为项目的初始版本，版本不保证稳定行，可以通过<code>git tag</code>来标记版本，将tag推送至仓库即可
-v1版本为稳定版本，当你的项目稳定之后，可以标记v1版本对外发布；另外对于稳定之后的预发布版本，由于Go命令首选的是正常版本，而不是与发布版本；可以通过<code>-</code>来制定预发布版本，如<code>v1.0.1-beta</code>、<code>v1.0.1-alpha</code>；使用的时候需要显示的指定与发布版本<code>go get github.com/youdw/helle@v1.0.1-beta</code>
+v1版本为稳定版本，当你的项目稳定之后，可以标记v1版本对外发布；另外对于稳定之后的预发布版本，由于Go命令首选的是正常版本，而不是预发布版本；可以通过<code>-</code>来制定预发布版本，如<code>v1.0.1-beta</code>、<code>v1.0.1-alpha</code>；使用的时候需要显示的指定预发布版本<code>go get github.com/youdw/helle@v1.0.1-beta</code>
 下面看下怎么发布第一个v0.0.1版本</p>
 <h3 id="创建仓库">创建仓库</h3>
 <p>首先在你的github仓库创建一个<code>repository</code>，命名为<code>hello</code>，然后将hello项目同步至仓库</p>
